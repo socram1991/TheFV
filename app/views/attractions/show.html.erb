@@ -1,0 +1,81 @@
+<div class="row">
+
+  <div class="col-md-4">
+
+<%= image_tag @attraction.item_img.url (:attraction_show), class: "item-show"%>
+
+  </div>
+
+  <div class="col-md-8">
+
+    <div class="attraction-info">
+
+      <h1 class="attraction-title"><%= @attraction.name %></h1>
+      <h3 class="attraction-name"><span>Category:</span> <%= @attraction.category.name %></h3>
+      <h4 class="avg-rating">Average Rating</h4>
+      <div class="average-review-rating" data-score= <%= @average_review %>></div>
+      <span class="number-of-reviews">Based on <%= @attraction.reviews.count %> reviews</span>
+      <p class="attraction-desc"><%= @attraction.description %><p>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-med-4">
+
+    <div class="reviews">
+
+      <!-- Where the reviews/ratings will go -->
+      <h1>Reviews</h1>
+      <%= render @attraction.reviews %>
+
+      <div>
+        <%= link_to "Add Review", new_attraction_review_path(@attraction), class:"btn btn-custom" %>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="links btn-group">
+
+<%= link_to "Back", root_path, class: "btn btn-custom" %>
+
+<% if user_signed_in? %>
+
+  <% if @attraction.user_id == current_user.id %>
+
+    <%= link_to "Edit", edit_attraction_path(@attraction), class: "btn btn-custom" %>
+    <%= link_to "Delete", attraction_path(@attraction), method: :delete, data: {confirm: "Are you sure you wanna
+    delete this?"}, class: "btn btn-custom" %>
+
+<% end %>
+
+<% end %>
+
+</div>
+
+<script>
+  $('.review-rating').raty({
+      readOnly: true,
+      score: function() {
+          return $(this).attr('data-score');
+          },
+          path: '/assets/'
+          });
+</script>
+
+<script>
+    $('.average-review-rating').raty({
+        readOnly: true,
+        path: '/assets/',
+        score: function () {
+            return $(this).attr('data-score')
+        }
+    });
+</script>

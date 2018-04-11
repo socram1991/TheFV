@@ -1,0 +1,9 @@
+<%= simple_form_for @attraction, :html => { :multipart => true} do |f| %>
+  <%= select_tag(:category_id, options_for_select(@categories), :prompt => "select a
+  category")%>
+  <%= f.file_field :item_img %>
+  <%= f.input :name, label: "Name" %>
+  <%= f.input :description %>
+  <%= f.submit "Create Item", :class => 'btn-custom2' %>
+
+<% end %>

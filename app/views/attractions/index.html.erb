@@ -1,0 +1,20 @@
+<h1 class="current-category"><%= params[:category] %></h1>
+<% if @attractions.count == 0 %>
+    <h2>There are no items in this category</h2>
+
+<% else %>
+
+    <div class="row">
+
+<% @attractions.each do |attraction| %>
+ <div class="col-md-3">
+  <a href="/attractions/<%= attraction.id %>">
+    <%= image_tag attraction.item_img.url(:attraction_index), class: "attraction" %>
+  </a>
+ </div>
+
+    <% end %>
+
+    </div>
+<% end %>
+
