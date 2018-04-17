@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Thereviewproject</title>
+    <title>Putt-Putt Review System</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -45,9 +45,10 @@
 
         </li  >
 
-      <% if user_signed_in? %>
-        <li><%= link_to "Add Item", new_attraction_path %></li>
-      <% end %>
+        <% if current_user.try(:admin?) %>
+            <li><%= link_to "Add Item", new_attraction_path %></li>
+            <li><%= link_to "Admin Menu", rails_admin_path %></li>
+        <% end %>
       </ol>
 
 
